@@ -11,7 +11,7 @@
 	
 	$consultaavanzada = '';
 	if($nombrepro != '') {
-		$consultaavanzada = "producto.nombre = '$nombrepro'";
+		$consultaavanzada = "producto.nombre LIKE '%$nombrepro%'";
 	}
 	if($preciopro == 0) {
 		if($consultaavanzada != '') {

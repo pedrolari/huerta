@@ -9,13 +9,13 @@
 	
 	$consultaavanzada = '';
 	if($nombreuser != '') {
-		$consultaavanzada = "cliente.nombre = '$nombreuser'";
+		$consultaavanzada = "cliente.nombre LIKE '%$nombreuser%'";
 	}
 	if($apellidosuser != '') {
 		if($consultaavanzada != '') {
-			$consultaavanzada .= " AND cliente.apellidos LIKE '$apellidosuser'";
+			$consultaavanzada .= " AND cliente.apellidos LIKE '%$apellidosuser%'";
 		} else {
-			$consultaavanzada = "cliente.apellidos LIKE '$apellidosuser'";
+			$consultaavanzada = "cliente.apellidos LIKE '%$apellidosuser%'";
 		}
 	}
 	if($localuser != '') {
@@ -27,9 +27,9 @@
 	}
 	if($useruser != '') {
 		if($consultaavanzada != '') {
-		$consultaavanzada .= " AND cliente.usuario LIKE '$useruser'";
+		$consultaavanzada .= " AND cliente.usuario LIKE '%$useruser%'";
 		} else {
-		$consultaavanzada = "cliente.usuario LIKE '$useruser'";
+		$consultaavanzada = "cliente.usuario LIKE '%$useruser%'";
 		}
 	}
 	
