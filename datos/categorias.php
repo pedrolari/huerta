@@ -21,9 +21,17 @@
 				$query1 ="SELECT * FROM categoria where id_catpadre=".$row["idcat"]." order by nombre ASC";
 				$resultado1 = $con -> query($query1);
 				while ($row1=$resultado1->fetch_array()) {
-					echo '
+					
+					if ($tipouser==0 && $_SESSION["user"]){
+						echo '
+						<li><a href="index.php?page=gridproductocliente&cat='.$row["nombre"].'&subcat='.$row1["nombre"].'">'.$row1["nombre"].'</a></li>
+						';
+					}else{
+					
+						echo '
 						<li><a href="index.php?page=gridproducto&cat='.$row["nombre"].'&subcat='.$row1["nombre"].'">'.$row1["nombre"].'</a></li>
 						';
+					}
 				}
 				echo '
 						</ul>
