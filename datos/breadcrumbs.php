@@ -7,7 +7,7 @@
 								<a href="index.php?page=main" >Inicio</a>
 							</li>
 							<?php 
-								if($page!="main" && $page!="mainproductor" && $page!="altaproducto" && $page!="listaproductos" && $page!="producto" && $page!="adminmain" && $page!="busquedausuario" && $page!="busquedaproducto"){
+								if($page!="main" && $page!="mainproductor" && $page!="maincliente" && $page!="altaproducto" && $page!="listaproductos" && $page!="producto" && $page!="adminmain" && $page!="busquedausuario" && $page!="busquedaproducto"){
 									
 									if($cat==""){
 										echo '
@@ -27,6 +27,13 @@
 										';
 									}
 								}else {
+									if($page=="maincliente"){
+										echo '
+											<li class="breadcrumb-item current">
+												<a href="index.php?page='.$page.'">Cliente</a>
+											</li>
+										';										
+									}									
 									if($page=="altaproducto"){
 										echo '
 											<li class="dropdown breadcrumb-item">

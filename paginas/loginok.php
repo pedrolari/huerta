@@ -24,6 +24,9 @@ if(!empty($_POST)){
 				$_SESSION["user"]=$user;
 				$_SESSION["dni"]=$dni;
 				$_SESSION["productor"]=$tipouser;
+				if ($tipouser==0){
+					print "<script>window.location='index.php?page=maincliente';</script>";
+				}
 				if ($tipouser==1){
 					print "<script>window.location='index.php?page=mainproductor';</script>";
 				}

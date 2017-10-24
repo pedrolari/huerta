@@ -102,7 +102,15 @@
 																	<a href="javascript:void(0);" data-href="paginas/getproducto.php?idproducto='.$idpro.'" class="openBtn"><i class="fa fa-plus-square-o"></i> informacion... </a>
 																	<div class="price-current pull-right">'.$row["precio"].'€</div>
 																</div>
+																<div class="hover-area">
+																	<div class="add-cart-button">
+																		<a href="index.php?page=maincliente&action=carrito&idproducto='.$idpro.'" class="le-button">añadir al carrito</a>
+																	</div>
+																	<div class="wish-compare">
+																		<a class="btn-add-to-wishlist" href="#">añadir a la lista de deseos</a>
+																	</div>
 
+																</div>
 															</div>
 														</div>
 														

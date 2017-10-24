@@ -1,65 +1,18 @@
-						<?php
-							
-							if(isset($_GET['action']) && $_GET['action']=="carrito"){ 
-								$id=$_GET['idproducto'];
-								if(isset($_SESSION['cart'][$id])){ 
-									$_SESSION['cart'][$id]['quantity']++; 
-								}else{ 
-									require_once 'db/conexion.php'; 
-									$resul = $con->query("SELECT * FROM producto WHERE id_producto='$id'");
-									while ($row = $resul->fetch_array()) {						
-										$_SESSION['cart'][$row['id_producto']]=array("quantity" => 1, "price" => $row['precio']); 
-									}										
-								} 
-							} 
-						?>
-
-						<!-- ============================================================= DESPLEGABLE CARRITO DE LA COMPRA ============================================================= -->
+<!-- ============================================================= DESPLEGABLE CARRITO DE LA COMPRA ============================================================= -->
 						<div class="top-cart-holder dropdown animate-dropdown">
 							
 							<div class="basket">
 								
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 									<div class="basket-item-count">
-										<span class="count">
-										<!-------- MUESTRO UNIDADES DEL CARRITO --------->
-										
-										<?php 
-											require_once 'db/conexion.php'; 
-											if(isset($_SESSION['cart'])){
-
-												//Guardo en $consulta todos los productos que tengo en el array de SESSION['cart']
-												$consulta="SELECT * FROM producto WHERE id_producto IN ("; 
-												foreach($_SESSION['cart'] as $id => $value) { 
-													$consulta.=$id.","; 
-												} 
-												$consulta=substr($consulta, 0, -1).") ORDER BY id_producto ASC";
-												
-												$totalprice=0;
-												$resultado = $con->query($consulta);
-
-												while ($row = $resultado->fetch_array()) {
-													$subtotal=$_SESSION['cart'][$row['id_producto']]['quantity']*$row['precio']; 
-													$totalprice+=$subtotal;
-													$cantidad=$_SESSION['cart'][$row['id_producto']]['quantity'];
-													$totalcantidad+=$cantidad;
-												}									  
-												echo $totalcantidad;
-											}else{ 
-												echo "0"; 
-											}
-											
-										
-										?>
-										
-										</span>
+										<span class="count">3</span>
 										<img src="assets/images/icon-cart.png" alt="" />
 									</div>
 
 									<div class="total-price-basket"> 
 										<span class="lbl">carrito:</span>
 										<span class="total-price">
-											<span class="value"><?php echo $totalprice ?></span><span class="sign">€</span>
+											<span class="sign">€</span><span class="value">3219,00</span>
 										</span>
 									</div>
 								</a>
