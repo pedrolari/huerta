@@ -1,18 +1,29 @@
-						<?php
-							
-							if(isset($_GET['action']) && $_GET['action']=="carrito"){ 
-								$id=$_GET['idproducto'];
-								if(isset($_SESSION['cart'][$id])){ 
-									$_SESSION['cart'][$id]['quantity']++; 
-								}else{ 
-									require_once 'db/conexion.php'; 
-									$resul = $con->query("SELECT * FROM producto WHERE id_producto='$id'");
-									while ($row = $resul->fetch_array()) {						
-										$_SESSION['cart'][$row['id_producto']]=array("quantity" => 1, "price" => $row['precio']); 
-									}										
-								} 
-							} 
-						?>
+<?php 
+	require_once 'db/conexion.php';
+    if(isset($_GET['action']) && $_GET['action']=="carrito"){ 
+        
+		//Inicializamos el contador de productos seleccionados.
+		$xTotal = 0;
+
+		//compruebo que sea entero
+		$id=intval($_GET['idproducto']); 
+		
+		//Si ya hay un producto le aumento en 1 la cantidad, sino hago la consulta en la BBDD
+        if(isset($_SESSION['carrito'][$id])){ 
+            $_SESSION['carrito'][$id]['cantidad']++; 
+        }else{ 
+            $consulta="SELECT * FROM producto WHERE id_producto={$id}"; 
+            $resultado=mysql_query($consulta); 
+            if(mysql_num_rows($resultado)!=0){ 
+                $row_s=mysql_fetch_array($resultado); 
+                //$_SESSION['carrito'][$row_s['id_producto']]=array("cantidad" => 1, "precio" => $row_s['precio']); 
+				$_SESSION['carrito'][$row_s['id_producto']]=array("precio" => $row_s['precio']); 
+            }else{ 
+                $message="This product id it's invalid!"; 
+            } 
+        } 
+    } 
+?>
 
 						<!-- ============================================================= DESPLEGABLE CARRITO DE LA COMPRA ============================================================= -->
 						<div class="top-cart-holder dropdown animate-dropdown">
@@ -25,30 +36,30 @@
 										<!-------- MUESTRO UNIDADES DEL CARRITO --------->
 										
 										<?php 
-											require_once 'db/conexion.php'; 
-											if(isset($_SESSION['cart'])){
-
-												//Guardo en $consulta todos los productos que tengo en el array de SESSION['cart']
-												$consulta="SELECT * FROM producto WHERE id_producto IN ("; 
-												foreach($_SESSION['cart'] as $id => $value) { 
-													$consulta.=$id.","; 
+											if(isset($_SESSION['carrito'])){ 
+												  
+												foreach($_SESSION['carrito'] as $id => $x) { 
+													
+													echo $_SESSION['carrito'][$row_s['id_producto']]=array("precio" => $row_s['precio']);
+													
+													//$coste = $precio * $x;
+													//Contador del total de productos añadidos al carro
+													//$xTotal = $xTotal + $x;
 												} 
-												$consulta=substr($consulta, 0, -1).") ORDER BY id_producto ASC";
-												
-												$totalprice=0;
-												$resultado = $con->query($consulta);
 
-												while ($row = $resultado->fetch_array()) {
-													$subtotal=$_SESSION['cart'][$row['id_producto']]['quantity']*$row['precio']; 
-													$totalprice+=$subtotal;
-													$cantidad=$_SESSION['cart'][$row['id_producto']]['quantity'];
-													$totalcantidad+=$cantidad;
-												}									  
-												echo $totalcantidad;
+										
+											 //echo $xTotal; 
+													  
+												} 												  
 											}else{ 
+												  
 												echo "0"; 
-											}
+												  
+											} 
+										  
 										?>
+										
+										
 										</span>
 										<img src="assets/images/icon-cart.png" alt="" />
 									</div>
@@ -56,7 +67,7 @@
 									<div class="total-price-basket"> 
 										<span class="lbl">carrito:</span>
 										<span class="total-price">
-											<span class="value"><?php echo $totalprice ?></span><span class="sign">€</span>
+											<span class="sign">€</span><span class="value">3219,00</span>
 										</span>
 									</div>
 								</a>

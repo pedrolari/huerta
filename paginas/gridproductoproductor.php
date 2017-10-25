@@ -76,7 +76,7 @@
 																	<div class="body">
 																		<div class="label-discount clear"></div>
 																		<div class="title">
-																			<a href="index.php?page=productocliente&cat='.$cat.'&subcat='.$subcat.'&idproducto='.$idpro.'&nombre='.$row["nombre"].'">'.$row["nombre"].'</a>
+																			<a href="index.php?page=productoproductor&cat='.$cat.'&subcat='.$subcat.'&idproducto='.$idpro.'&nombre='.$row["nombre"].'">'.$row["nombre"].'</a>
 																		</div>
 																		<div class="brand">';echo cortarTexto($descrip, 80); echo'</div>
 																		<div class="brand">Stock: '.$row["stock"].' uds</div>
@@ -86,15 +86,14 @@
 																		<a href="javascript:void(0);" data-href="paginas/getproducto.php?idproducto='.$idpro.'" class="openBtn"><i class="fa fa-plus-square-o"></i> informacion... </a>
 																		<div class="price-current pull-right">'.$row["precio"].'€</div>
 																	</div>
-																<div class="hover-area">
-																	<div class="add-cart-button">
-																		<a href="index.php?page=gridproductocliente&action=carrito&idproducto='.$idpro.'&cat='.$cat.'&subcat='.$subcat.'" class="le-button">añadir al carrito</a>
+																	<div class="hover-area">
+																		<div class="wish-compare">
+																			<br><i class="fa fa-pencil-square-o"></i><a href="single-product.html">modificar producto</a>
+																		</div>
+																		<div class="wish-compare">
+																			<i class="fa fa-trash-o"></i><a href="#">eliminar producto</a>
+																		</div>
 																	</div>
-																	<div class="wish-compare">
-																		<a class="btn-add-to-wishlist" href="#">añadir a la lista de deseos</a>
-																	</div>
-
-																</div>
 																</div>
 															</div>
 															

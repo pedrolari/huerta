@@ -90,7 +90,7 @@
 																<div class="body">
 																	<div class="label-discount clear"></div>
 																	<div class="title">
-																		<a href="index.php?page=producto&cat='.$catpadre.'&subcat='.$cathija.'&idproducto='.$idpro.'&nombre='.$row["nombre"].'">'.$row["nombre"].'</a>
+																		<a href="index.php?page=productoproductor&cat='.$catpadre.'&subcat='.$cathija.'&idproducto='.$idpro.'&nombre='.$row["nombre"].'">'.$row["nombre"].'</a>
 																	</div>
 																	<div class="brand">';echo cortarTexto($descrip, 80); echo'</div>
 																	<div class="brand">Stock: '.$row["stock"].' uds</div>

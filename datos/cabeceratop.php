@@ -4,7 +4,22 @@
 			<div class="container">
 				<div class="col-xs-12 col-sm-6 no-margin">
 					<ul>
-						<li><a href="index.php?page=main">Inicio</a></li>
+						<?php
+						if (isset($_SESSION['user'])){
+							if ($_SESSION['productor']==0){
+								echo '<li><a href="index.php?page=maincliente">Inicio</a></li>';
+							}
+							if ($_SESSION['productor']==1){
+								echo '<li><a href="index.php?page=mainproductor">Inicio</a></li>';
+							}
+							if ($_SESSION['productor']==2){
+								echo '<li><a href="index.php?page=adminmain">Inicio</a></li>';
+							}
+						}
+						if (!isset($_SESSION['user'])){
+								echo '<li><a href="index.php?page=main">Inicio</a></li>';
+						}
+						?>
 						<li><a href="index.php?page=contacto">Contacto</a></li>
 					</ul>
 				</div><!-- /.col -->

@@ -63,18 +63,6 @@
 				<div class="row">
 					<div class="col-md-8">
 						<?php
-							if (isset($_SESSION['user'])){
-								if ($page == "main" && $_SESSION['productor']==1){
-									$page = "mainproductor";
-								}
-
-							}
-							if (isset($_SESSION['user'])){
-								if ($page == "main" && $_SESSION['productor']==2){
-									$page = "adminmain";
-								}
-							}	
-
 							include("./paginas/".$page.".php");
 						?>
 					</div>
@@ -99,9 +87,6 @@
 											}
 										}
 									}
-								
-
-									
 								} else {
 									if ($page != "carrito" && $page != "checkout"){
 										include("./datos/quienes.php") ; 

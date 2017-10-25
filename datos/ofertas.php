@@ -2,6 +2,16 @@
 					<aside class="sidebar blog-sidebar">
 						<div class="widget">
 						<h2 class="border">Ofertas</h1>
+						<?php
+						$cont=0;
+						require_once 'db/conexion.php';
+						$result = $con->query("SELECT * FROM producto WHERE oferta=1 Order by id_producto ASC");
+						if ($result->num_rows > 0) {
+							while ($row = $result->fetch_assoc()) {
+						
+							}
+						}
+						?>
 						<div class="product-item">
 
 							<div class="image">

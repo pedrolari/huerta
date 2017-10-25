@@ -22,12 +22,22 @@
 				$resultado1 = $con -> query($query1);
 				while ($row1=$resultado1->fetch_array()) {
 					
-					if ($tipouser==0 && $_SESSION["user"]){
+					if ($_SESSION["productor"]==0 && $_SESSION["user"]){
 						echo '
 						<li><a href="index.php?page=gridproductocliente&cat='.$row["nombre"].'&subcat='.$row1["nombre"].'">'.$row1["nombre"].'</a></li>
 						';
-					}else{
-					
+					}  else 
+					if ($_SESSION["productor"]==1 && $_SESSION["user"]){
+						echo '
+						<li><a href="index.php?page=gridproductoproductor&cat='.$row["nombre"].'&subcat='.$row1["nombre"].'">'.$row1["nombre"].'</a></li>
+						';
+					} else
+					if ($_SESSION["productor"]==2 && $_SESSION["user"]){
+						echo '
+						<li><a href="index.php?page=gridproductoadmin&cat='.$row["nombre"].'&subcat='.$row1["nombre"].'">'.$row1["nombre"].'</a></li>
+						';
+					}
+					else{
 						echo '
 						<li><a href="index.php?page=gridproducto&cat='.$row["nombre"].'&subcat='.$row1["nombre"].'">'.$row1["nombre"].'</a></li>
 						';
