@@ -12,7 +12,7 @@
 									<div class="total-price-basket"> 
 										<span class="lbl">carrito:</span>
 										<span class="total-price">
-											<span class="sign">€</span><span class="value">3219,00</span>
+											<span class="value">3219,00</span><span class="sign">€</span>
 										</span>
 									</div>
 								</a>
@@ -27,7 +27,7 @@
 												</div>
 												<div class="col-xs-8 col-sm-8 no-margin">
 													<div class="title">Zanahorias</div>
-													<div class="price">€5.00</div>
+													<div class="price">€15.00</div>
 												</div>
 											</div>
 											<a class="close-btn" href="#"></a>

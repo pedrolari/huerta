@@ -93,10 +93,7 @@
 																		<a href="index.php?page=producto&cat='.$catpadre.'&subcat='.$cathija.'&idproducto='.$idpro.'&nombre='.$row["nombre"].'">'.$row["nombre"].'</a>
 																	</div>
 																	<div class="brand">';echo cortarTexto($descrip, 80); echo'</div>
-																	<div class="brand">Stock: '.$row["stock"].' uds</div>
-																	
-																	
-																	
+																	<div class="label-discount green">Stock: '.$row["stock"].' uds</div>
 																</div>
 																<div class="prices">
 																	<a href="javascript:void(0);" data-href="paginas/getproducto.php?idproducto='.$idpro.'" class="openBtn"><i class="fa fa-plus-square-o"></i> informacion... </a>

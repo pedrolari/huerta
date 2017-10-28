@@ -93,10 +93,7 @@
 																		<a href="index.php?page=productocliente&cat='.$catpadre.'&subcat='.$cathija.'&idproducto='.$idpro.'&nombre='.$row["nombre"].'">'.$row["nombre"].'</a>
 																	</div>
 																	<div class="brand">';echo cortarTexto($descrip, 80); echo'</div>
-																	<div class="brand">Stock: '.$row["stock"].' uds</div>
-																	
-																	
-																	
+																	<div class="label-discount green">Stock: '.($row["stock"] - $_SESSION['cart'][$row['id_producto']]['quantity']).' uds</div>
 																</div>
 																<div class="prices">
 																	<a href="javascript:void(0);" data-href="paginas/getproducto.php?idproducto='.$idpro.'" class="openBtn"><i class="fa fa-plus-square-o"></i> informacion... </a>
@@ -104,7 +101,19 @@
 																</div>
 																<div class="hover-area">
 																	<div class="add-cart-button">
-																		<a href="index.php?page=maincliente&action=carrito&idproducto='.$idpro.'" class="le-button">añadir al carrito</a>
+																		';
+																		if($row["stock"]==0 || $_SESSION['cart'][$row['id_producto']]['quantity'] >= $row['stock']){
+																			echo'
+																			<a class="le-button disabled">no hay stock</a>
+																			';
+																		}else{
+																			echo '
+																				<a href="index.php?page=maincliente&action=carrito&idproducto='.$idpro.'&pag='.$compag.'" class="le-button">añadir al carrito</a>
+																			';
+																		}
+																		
+																		
+																		echo '
 																	</div>
 																	<div class="wish-compare">
 																		<a class="btn-add-to-wishlist" href="#">añadir a la lista de deseos</a>
@@ -152,7 +161,7 @@
 													$IncrimentNum =(($compag +1)<=$TotalRegistro)?($compag +1):1;
 													$DecrementNum =(($compag -1))<1?1:($compag -1);
 													
-													echo "<li><a href=\"index.php?page=main&pag=\".$DecrementNum.\">Anterior</a></li>";
+													echo "<li><a href=\"index.php?page=maincliente&pag=\".$DecrementNum.\">Anterior</a></li>";
 																
 													//Se resta y suma con el numero de pag actual con el cantidad de 
 													//números  a mostrar
@@ -169,13 +178,13 @@
 														if($i<=$TotalRegistro){
 															//Validamos la pag activo
 														  if($i==$compag){
-														   echo "<li class=\"current\"><a href=\"index.php?page=main&pag=".$i."\">".$i."</a></li>";
+														   echo "<li class=\"current\"><a href=\"index.php?page=maincliente&pag=".$i."\">".$i."</a></li>";
 														  }else {
-															echo "<li><a href=\"index.php?page=main&pag=".$i."\">".$i."</li>";
+															echo "<li><a href=\"index.php?page=maincliente&pag=".$i."\">".$i."</li>";
 														  }     		
 														}
 													 }
-													echo "<li><a href=\"index.php?page=main&pag=".$IncrimentNum."\">Siguiente</a></li>";
+													echo "<li><a href=\"index.php?page=maincliente&pag=".$IncrimentNum."\">Siguiente</a></li>";
 													echo '
 													
 													</ul>
