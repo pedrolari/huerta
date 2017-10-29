@@ -82,7 +82,15 @@
 															}
 															if ($dias<=15){
 																echo '	<div class="ribbon blue"><span>nuevo!</span></div>';
-															}	
+															}
+															//productos oferta
+															$result3 = $con->query("SELECT * from producto where oferta = 1 and id_producto = '$idpro'");
+															if ($result3->num_rows > 0) {
+																
+																while ($rowoferta = $result3->fetch_assoc()) {
+																	echo '<div class="ribbon green"><span>oferta!</span></div>';
+																}
+															}															
 															echo '
 																<div class="image">
 																	<img alt="" height="150" src="'.$img.'" />
@@ -154,14 +162,13 @@
 												<div class="col-xs-12 col-sm-12 text-left">
 													<ul class="pagination ">';
 													
-											
-													/*Sector de Paginacion */
+											/*Sector de Paginacion */
 													
 													//Operacion matematica para botón siguiente y atrás 
 													$IncrimentNum =(($compag +1)<=$TotalRegistro)?($compag +1):1;
 													$DecrementNum =(($compag -1))<1?1:($compag -1);
 													
-													echo "<li><a href=\"index.php?page=maincliente&pag=\".$DecrementNum.\">Anterior</a></li>";
+													echo '<li><a href="index.php?page=maincliente&pag='.$DecrementNum.'&cat='.$cat.'&subcat='.$subcat.'">Anterior</a></li>';
 																
 													//Se resta y suma con el numero de pag actual con el cantidad de 
 													//números  a mostrar
@@ -178,13 +185,13 @@
 														if($i<=$TotalRegistro){
 															//Validamos la pag activo
 														  if($i==$compag){
-														   echo "<li class=\"current\"><a href=\"index.php?page=maincliente&pag=".$i."\">".$i."</a></li>";
+														   echo '<li class="current"><a href="index.php?page=maincliente&pag='.$i.'">'.$i.'</a></li>';
 														  }else {
-															echo "<li><a href=\"index.php?page=maincliente&pag=".$i."\">".$i."</li>";
+															echo '<li><a href="index.php?page=maincliente&pag='.$i.'">'.$i.'</li>';
 														  }     		
 														}
 													 }
-													echo "<li><a href=\"index.php?page=maincliente&pag=".$IncrimentNum."\">Siguiente</a></li>";
+													echo '<li><a href="index.php?page=maincliente&pag='.$IncrimentNum.'&cat='.$cat.'&subcat='.$subcat.'">Siguiente</a></li>';
 													echo '
 													
 													</ul>
