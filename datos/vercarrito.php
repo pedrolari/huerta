@@ -1,5 +1,4 @@
 						<?php
-							
 							if(isset($_GET['action']) && $_GET['action']=="carrito"){ 
 								$id=$_GET['idproducto'];
 								if(isset($_SESSION['cart'][$id])){ 
@@ -8,15 +7,26 @@
 									if($_SESSION['cart'][$id]['quantity'] < $_SESSION['cart'][$id]['stock']){
 										$_SESSION['cart'][$id]['quantity']++; 
 									}
+									
+									$idpronuevo = $_POST['idpronuevo'];
+									$nuevacantidad = $_POST['cantpronuevo'];
+									$_SESSION['cart'][$idpronuevo]['quantity']=$nuevacantidad;
+									
 								}else{ 
 									require_once 'db/conexion.php'; 
 									$resul = $con->query("SELECT * FROM producto WHERE id_producto='$id'");
 									while ($row = $resul->fetch_array()) {						
-										$_SESSION['cart'][$row['id_producto']]=array("quantity" => 1, "price" => $row['precio'], "nombre" => $row['nombre'], "stock" => $row['stock'], "imagen" => $row['id_imagen']); 
+										$_SESSION['cart'][$row['id_producto']]=array("id" => $id, "quantity" => 1, "price" => $row['precio'], "nombre" => $row['nombre'], "stock" => $row['stock'], "imagen" => $row['id_imagen']); 
 									}										
 								} 
-							} 
+							}
 
+							if(isset($_POST['idpronuevo']) && isset($_POST['cantpronuevo'])){
+								$idpronuevo = $_POST['idpronuevo'];
+								$nuevacantidad = $_POST['cantpronuevo'];
+								$_SESSION['cart'][$idpronuevo]['quantity']=$nuevacantidad;
+								
+							}		
 						?>
 
 						<!-- ============================================================= DESPLEGABLE CARRITO DE LA COMPRA ============================================================= -->

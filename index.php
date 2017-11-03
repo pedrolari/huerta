@@ -6,8 +6,9 @@
 	$subcat = isset($_GET['subcat']) ? $_GET['subcat'] : null;
 	$producto = isset($_GET['idproducto']) ? $_GET['idproducto'] : null;
 	$nombre = isset($_GET['nombre']) ? $_GET['nombre'] : null;
-?>
 
+?>
+<?php include("actualizarcarrito.php"); ?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -160,5 +161,20 @@
 		}); 
 	});
 	</script>
+	
+	<!-- REFFRESCO CARRITO  -->
+	<script>
+	$(document).ready(function(){
+		$("#actualizar").click(function(){
+			$('.cantidad').each(function(){
+				idpronuevo = $(this).attr('id');
+				cantpronuevo = $(this).val();
+				//alert(idpronuevo + " + " +cantpronuevo);
+				$.post("index.php?page=carrito", { idpronuevo: idpronuevo, cantpronuevo: cantpronuevo }); 					
+			});
+		});
+	});
+	</script>
+	
 </body>
 </html>

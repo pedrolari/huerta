@@ -13,9 +13,8 @@
 					$nombreproducto=$_SESSION['cart'][$row['id_producto']]['nombre']; 
 					$imagenproducto=$_SESSION['cart'][$row['id_producto']]['imagen']; 
 					$precioproducto=$_SESSION['cart'][$row['id_producto']]['price'];
-					
-					
 					$cantidadproducto=$_SESSION['cart'][$row['id_producto']]['quantity'];
+					$id=$_SESSION['cart'][$row['id_producto']]['id'];
 
 					//Consulta para la imagen
 					$result1 = $con->query("SELECT * FROM imagenes WHERE id = '$imagenproducto'");
@@ -41,10 +40,10 @@
 						<div class="col-xs-12 col-sm-3 no-margin">
 							<div class="quantity">
 								<div class="le-quantity"> 
-									<form>
-										<a class="minus" href="#reduce"></a>
-										<input name="quantity" readonly="readonly" type="text" value="'. $cantidadproducto.'" />
-										<a class="plus" href="#add"></a>
+									<form action="/paginas/actualizarcarrito.php" method="post">
+										<a class="minus" id="menosuno" href="#reduce"></a>
+										<input name="quantity" class="cantidad" id="'.$id.'" readonly="readonly" type="text" value="'.$cantidadproducto.'" />
+										<a class="plus" id="masuno" href="#add"></a>
 									</form>
 								</div>
 							</div>
@@ -61,7 +60,7 @@
 					';
 					
 				}		
-				echo '<a class="le-button big pull-right" href="index.php?page=carrito"><i class="fa fa-refresh" aria-hidden="true"></i> actualizar carrito</a>';				
+				echo '<a class="le-button big pull-right" id="actualizar" href="index.php?page=carrito"><i class="fa fa-refresh" aria-hidden="true"></i> actualizar carrito</a>';				
 			
 			}else{ 
 			echo '
