@@ -27,7 +27,8 @@
 			$resLineaPedido = $con->query("INSERT INTO lineapedido (idpedido, idproducto, cantidad, precio) VALUES ('$idMaxPedido', '$idpropedido', '$cantidadproducto', '$totalLinea')");
 			
 			//ACTUALIZAR STOCK
-			$resUpdateStock = $con->query("UPDATE producto SET stock=(stock-'$cantidadproducto') WHERE id_producto='$idpropedido'");
+			$stocknuevo = ($row['stock']-$cantidadproducto);
+			$resUpdateStock = $con->query("UPDATE producto SET stock='$stocknuevo' WHERE id_producto='$idpropedido'");
 			
 		}
 			//MUESTRO MENSAJE DE PEDIDO REALIZADO

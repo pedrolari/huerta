@@ -169,12 +169,42 @@
 			$('.cantidad').each(function(){
 				idpronuevo = $(this).attr('id');
 				cantpronuevo = $(this).val();
-				//alert(idpronuevo + " + " +cantpronuevo);
 				$.post("index.php?page=carrito", { idpronuevo: idpronuevo, cantpronuevo: cantpronuevo }); 					
 			});
 		});
 	});
 	</script>
+
 	
+	<!-- DEVOLVER -->
+	<script>
+	$(document).ready(function(){
+		$("#devolver").click(function(){
+			$('.cantidaddevolucion').each(function(){
+				idlineapedidodetalle = $(this).attr('id');
+				cantprodevolucion = $(this).val();
+				//alert(idlineapedidodetalle +""+ cantprodevolucion);
+				$.post("index.php?page=mainclientedetalledevolucionok", { idlineapedidodetalle: idlineapedidodetalle, cantprodevolucion: cantprodevolucion }); 					
+			});
+		});
+	});
+	</script>
+	
+	<!-- DESCUENTOS  -->
+	<script>
+	$(document).ready(function(){
+		$("#aplicardescuento").click(function(){
+			$("input:checkbox:checked").each(function() {
+					idprodescuento = $(this).attr('id');
+					porciento = $('.'+idprodescuento).val();
+			        //alert("El checkbox " + idprodescuento + " con valor " + porciento + " está seleccionado");
+			        $.post("index.php?page=adminofertas", { idprodescuento: idprodescuento, porciento: porciento });
+			});
+
+		});
+	});
+	</script>
+
+
 </body>
 </html>
