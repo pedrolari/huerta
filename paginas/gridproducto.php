@@ -48,7 +48,10 @@
 													while ($row = $producto->fetch_assoc()) { 
 													
 														$idpro = $row["id_producto"];
-															
+														$des = $row["descuento"];
+														$oferta = $row["oferta"];
+														$precioactual = $row["precio"];
+
 														$result1 = $con->query("SELECT * FROM imagenes WHERE id in (SELECT id_imagen FROM producto WHERE id_producto = '$idpro')");
 														while ($rowimg = $result1->fetch_assoc()) {  
 															$img = $rowimg["imagen"];
@@ -74,7 +77,7 @@
 															if ($result3->num_rows > 0) {
 																
 																while ($rowoferta = $result3->fetch_assoc()) {
-																	echo '<div class="ribbon green"><span>oferta!</span></div>';
+																	echo '<div class="ribbon green"><span>oferta! '.$rowoferta['descuento'].' %</span></div>';
 																}
 															}															
 															echo '
@@ -88,9 +91,20 @@
 																		</div>
 																		<div class="brand">';echo cortarTexto($descrip, 80); echo'</div>
 																		<div class="label-discount green">Stock: '.$row["stock"].' uds</div>
+																		<a href="javascript:void(0);" data-href="paginas/getproducto.php?idproducto='.$idpro.'" class="openBtn"><i class="fa fa-plus-square-o"></i> informacion... </a>
 																	</div>
 																	<div class="prices">
-																		<a href="javascript:void(0);" data-href="paginas/getproducto.php?idproducto='.$idpro.'" class="openBtn"><i class="fa fa-plus-square-o"></i> informacion... </a>
+																		';
+																		
+														
+																		$precioantiguo = (($precioactual*100)/(100-$des));
+																		$precioantiguoredondeado=round($precioantiguo, 2);
+																		if($oferta==1){
+																			echo '
+																				<div class="price-prev"><strike>'.$precioantiguoredondeado.' </strike>€</div>
+																			';
+																		}
+																		echo '		
 																		<div class="price-current pull-right">'.$row["precio"].'€</div>
 																	</div>
 

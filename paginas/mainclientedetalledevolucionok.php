@@ -1,8 +1,23 @@
 <?php
-	if(isset($_POST['idlineapedidodetalle']) && isset($_POST['cantprodevolucion'])){
+	// if(isset($_POST['idlineapedidodetalle']) && isset($_POST['cantprodevolucion'])){
 		$lineapedidoid = $_POST['idlineapedidodetalle'];
 		$cantdevolucion = $_POST['cantprodevolucion'];
 		
+
+		$result1 = $con->query("select pedido.dnicliente, pedido.idpedido from pedido, lineapedido where pedido.idpedido=lineapedido.idpedido and lineapedido.idlineapedido = '$lineapedidoid'");
+		while ($row11 = $result1->fetch_assoc()) {  
+			$dnicliente1 = $row11['dnicliente'];
+			
+			echo $dnicliente1;
+		}
+
+		$result7= $con->query("select idpedido from pedido WHERE dnicliente NOT IN ("'$dnicliente1'")");
+		while ($row7 = $result7->fetch_assoc()) { 
+			$pedidoeliminar = $row7['idpedido'] 
+			$con->query("DELETE FROM lineapedido WHERE idpedido = '$pedidoeliminar'");
+		}
+
+		/*
 		$result1 = $con->query("SELECT * FROM lineapedido WHERE idlineapedido = '$lineapedidoid'");
 		while ($row1 = $result1->fetch_assoc()) {  
 			$restado = ($row1["cantidad"]-$cantdevolucion);
@@ -67,7 +82,9 @@
 		if ($result2->num_rows == 0) {
 			$result7 = $con->query("DELETE FROM pedido WHERE idpedido='$pedidoid'");
 		}
-	}		
+
+		*/
+	// }		
 
 ?>
 

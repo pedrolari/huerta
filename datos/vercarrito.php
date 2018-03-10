@@ -8,9 +8,9 @@
 										$_SESSION['cart'][$id]['quantity']++; 
 									}
 									
-									$idpronuevo = $_POST['idpronuevo'];
-									$nuevacantidad = $_POST['cantpronuevo'];
-									$_SESSION['cart'][$idpronuevo]['quantity']=$nuevacantidad;
+									// $idpronuevo = $_POST['idpronuevo'];
+									// $nuevacantidad = $_POST['cantpronuevo'];
+									// $_SESSION['cart'][$idpronuevo]['quantity']=$nuevacantidad;
 									
 								}else{ 
 									require_once 'db/conexion.php'; 
@@ -20,13 +20,32 @@
 									}										
 								} 
 							}
+							
 
-							if(isset($_POST['idpronuevo']) && isset($_POST['cantpronuevo'])){
-								$idpronuevo = $_POST['idpronuevo'];
-								$nuevacantidad = $_POST['cantpronuevo'];
-								$_SESSION['cart'][$idpronuevo]['quantity']=$nuevacantidad;
+							
+							// if(isset($_POST['idpronuevo']) && isset($_POST['cantpronuevo'])){
+							// 	echo'<script type="text/javascript">alert("Tarea Guardada");</script>';	
+							// 	$idpronuevo=$_POST['idpronuevo'];
+							// 	$nuevacantidad = $_POST['cantpronuevo'];
+							// 	if(($_SESSION['cart'][$idpronuevo]['quantity'] + $nuevacantidad) < $_SESSION['cart'][$id]['stock']){
+							// 		$_SESSION['cart'][$idpronuevo]['quantity']=$nuevacantidad;
+							// 	}
+							// }
+
+
+							// QUITAR LINEA PEDIDO
+							if (isset($_GET['action']) && $_GET['action']=="remove") {
+
+							    $key=array_search($_GET['id'], $_SESSION['cart'][$id]['id']);
+							    echo $key;
+							    if($key!==false){
+							    	
+							    	unset($_SESSION['cart'][$id][$key]);
+							    }
+							    $_SESSION["cart"] = array_values($_SESSION["cart"]);
+							} 				
+
 								
-							}		
 						?>
 
 						<!-- ============================================================= DESPLEGABLE CARRITO DE LA COMPRA ============================================================= -->
@@ -37,7 +56,7 @@
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 									<div class="basket-item-count">
 										<span class="count">
-										<!-------- MUESTRO UNIDADES DEL CARRITO --------->
+										<!-- MUESTRO UNIDADES DEL CARRITO -->
 										
 										<?php 
 											require_once 'db/conexion.php'; 
@@ -49,7 +68,6 @@
 													$consulta.=$id.","; 
 												} 
 												$consulta=substr($consulta, 0, -1).") ORDER BY id_producto ASC";
-												
 												$totalprice=0;
 												$resultado = $con->query($consulta);
 
@@ -84,6 +102,7 @@
 
 												$resultado = $con->query($consulta);
 												while ($row = $resultado->fetch_array()) {
+
 													$nombreproducto=$_SESSION['cart'][$row['id_producto']]['nombre']; 
 													$imagenproducto=$_SESSION['cart'][$row['id_producto']]['imagen']; 
 													$precioproducto=$_SESSION['cart'][$row['id_producto']]['price'];
@@ -111,7 +130,7 @@
 																	<div class="price">'. $cantidadproducto.' Uds.</div>
 																</div>
 															</div>
-															<a class="close-btn" href="#"></a>
+															<a class="close-btn" href="index.php?page=carrito&action=remove&id='.$_SESSION['cart'][$id]['id'].'"></a>
 														</div>
 													</li>
 													';

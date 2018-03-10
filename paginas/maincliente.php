@@ -91,7 +91,7 @@
 															if ($result3->num_rows > 0) {
 																
 																while ($rowoferta = $result3->fetch_assoc()) {
-																	echo '<div class="ribbon green"><span>oferta!</span></div>';
+																	echo '<div class="ribbon green"><span>oferta! '.$rowoferta['descuento'].' %</span></div>';
 																}
 															}															
 															echo '

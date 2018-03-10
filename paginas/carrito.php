@@ -6,6 +6,55 @@
 			<!-- ============= ITEM ============= -->
 			<?php 
 			require_once 'db/conexion.php'; 
+
+			// REFRESCAR CARRITO
+			if(isset($_POST['idpronuevo']) && isset($_POST['cantpronuevo'])){
+				echo'<script type="text/javascript">alert("Tarea Guardada");</script>';	
+				$idpronuevo=$_POST['idpronuevo'];
+				$nuevacantidad = $_POST['cantpronuevo'];
+				if($_SESSION['cart'][$idpronuevo]['quantity'] < $_SESSION['cart'][$id]['stock']){
+					$_SESSION['cart'][$idpronuevo]['quantity']=$nuevacantidad;
+				}
+			}
+
+
+			//REVISAR QUE SE ELIMINEN CORRECTAMENTE LAS LINEAS DE PEDIDOS
+			// QUITAR LINEA PEDIDO
+			function searcharray($value, $key, $array) {
+			   foreach ($array as $k => $val) {
+			       if ($val[$key] == $value) {
+			           return $k;
+			       }
+			   }
+			   return null;
+			}
+
+			if (isset($_GET['action']) && $_GET['action']=="remove") {
+				$valorID = $_GET['id'];
+				// var_dump($valorID);
+			    // $key=array_search($valorID, array_column($_SESSION['cart'], 'id'));
+			    // var_dump($key);
+				
+
+
+				$results = searcharray($valorID, id, $_SESSION['cart']);
+		    	
+				unset($_SESSION['cart'][$results]);
+		    	$_SESSION["cart"] = array_values($_SESSION["cart"]);
+
+		    	// unset($_SESSION['cart'][$key]);
+
+			    // print_r(array_values($_SESSION['cart']));
+
+			    // if($key!==false){
+			    // // 	// unset($_SESSION['cart'][0]);
+			    // }
+			    // if(is_null($_SESSION["cart"])){
+			    // 	unset($_SESSION["cart"]);
+			    // }
+			}
+
+			//CARRITO DE LA COMPRA
 			if(isset($_SESSION['cart'])){
 
 				$resultado = $con->query($consulta);
@@ -15,6 +64,7 @@
 					$precioproducto=$_SESSION['cart'][$row['id_producto']]['price'];
 					$cantidadproducto=$_SESSION['cart'][$row['id_producto']]['quantity'];
 					$id=$_SESSION['cart'][$row['id_producto']]['id'];
+					$idborrar=$_SESSION['cart'][$row['id_producto']]['id'];
 
 					//Consulta para la imagen
 					$result1 = $con->query("SELECT * FROM imagenes WHERE id = '$imagenproducto'");
@@ -40,7 +90,7 @@
 						<div class="col-xs-12 col-sm-3 no-margin">
 							<div class="quantity">
 								<div class="le-quantity"> 
-									<form action="/paginas/actualizarcarrito.php" method="post">
+									<form action="/paginas/carrito.php" method="post">
 										<a class="minus" id="menosuno" href="#reduce"></a>
 										<input name="quantity" class="cantidad" id="'.$id.'" readonly="readonly" type="text" value="'.$cantidadproducto.'" />
 										<a class="plus" id="masuno" href="#add"></a>
@@ -53,13 +103,15 @@
 							<div class="price">
 								'. $precioproducto.' €
 							</div>
-							<a class="close-btn" href="#"></a>
+							<a class="close-btn" href="index.php?page=carrito&action=remove&id='.$idborrar.'"></a>
 						</div>
 					</div><!-- /.cart-item -->
 					
 					';
 					
 				}		
+
+
 				echo '<a class="le-button big pull-right" id="actualizar" href="index.php?page=carrito"><i class="fa fa-refresh" aria-hidden="true"></i> actualizar carrito</a>';				
 			
 			}else{ 
@@ -106,6 +158,10 @@
 								<div class="value pull-right"><?php echo $totalprice; ?><span class="sign"> €</span></div>
 							</li>
 						</ul>
+
+
+
+						
 						<div class="buttons-holder">
 							<a class="le-button big" href="index.php?page=pagarcarrito" >pagar</a>
 							<a class="simple-link block" href="index.php?page=maincliente" ><i class="fa fa-arrow-right" aria-hidden="true"></i> continuar comprando</a>

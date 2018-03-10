@@ -6,7 +6,7 @@
 						<!-- ============================================================= INFORMACION DE CONTACTO ============================================================= -->
 						<div class="contact-info">
 							<div class="footer-logo">
-								<img alt="logo" src="assets/images/Logo-footer.jpg" width="300" height="93"/>
+								<img alt="logo" src="assets/images/icono.png" width="300" >
 							</div><!-- /.footer-logo -->
 							
 							<p class="regular-bold"> Contactanos via telefono o Email:</p>
@@ -36,13 +36,13 @@
 							<div class="widget">
 								<h3>Encuentralo Rapido</h3>
 								<ul>
-									<li><a href="category-grid.html">Verduras</a></li>
-									<li><a href="category-grid.html">Hortalizas</a></li>
-									<li><a href="category-grid.html">Frutas</a></li>
-									<li><a href="category-grid.html">Legumbres</a></li>
-									<li><a href="category-grid.html">Huevos</a></li>
-									<li><a href="category-grid.html">Frutos Secos</a></li>
-									<li><a href="category-grid.html">Despensa</a></li>
+									<li><a href="#">Verduras</a></li>
+									<li><a href="#">Hortalizas</a></li>
+									<li><a href="#">Frutas</a></li>
+									<li><a href="#">Legumbres</a></li>
+									<li><a href="#">Huevos</a></li>
+									<li><a href="#">Frutos Secos</a></li>
+									<li><a href="#">Despensa</a></li>
 								</ul>
 							</div><!-- /.widget -->
 						</div><!-- /.link-widget -->
@@ -51,9 +51,9 @@
 							<div class="widget">
 								<h3>Informacion</h3>
 								<ul>
-									<li><a href="category-grid.html">Encuentra un productor</a></li>
-									<li><a href="category-grid.html">Sobre Nosotros</a></li>
-									<li><a href="category-grid.html">Contactanos</a></li>
+									<li><a href="#">Encuentra un productor</a></li>
+									<li><a href="#">Sobre Nosotros</a></li>
+									<li><a href="#">Contactanos</a></li>
 									
 
 
@@ -65,12 +65,12 @@
 							<div class="widget">
 								<h3>Information</h3>
 								<ul>
-									<li><a href="category-grid.html">Mi Cuenta</a></li>
-									<li><a href="category-grid.html">Estado Pedidos</a></li>
-									<li><a href="category-grid.html">Lista de Deseos</a></li>
-									<li><a href="category-grid.html">Atencion al Cliente</a></li>
-									<li><a href="category-grid.html">Devoluciones</a></li>
-									<li><a href="category-grid.html">FAQs</a></li>
+									<li><a href="#">Mi Cuenta</a></li>
+									<li><a href="#">Estado Pedidos</a></li>
+									<li><a href="#">Lista de Deseos</a></li>
+									<li><a href="#">Atencion al Cliente</a></li>
+									<li><a href="#">Devoluciones</a></li>
+									<li><a href="#">FAQs</a></li>
 
 
 								</ul>

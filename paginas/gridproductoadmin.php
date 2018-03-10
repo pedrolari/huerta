@@ -77,7 +77,7 @@
 															if ($result3->num_rows > 0) {
 																
 																while ($rowoferta = $result3->fetch_assoc()) {
-																	echo '<div class="ribbon green"><span>oferta!</span></div>';
+																	echo '<div class="ribbon green"><span>oferta! '.$rowoferta['descuento'].' %</span></div>';
 																}
 															}															
 															echo '
@@ -87,7 +87,7 @@
 																	<div class="body">
 																		<div class="label-discount clear"></div>
 																		<div class="title">
-																			<a href="index.php?page=productocliente&cat='.$cat.'&subcat='.$subcat.'&idproducto='.$idpro.'&nombre='.$row["nombre"].'">'.$row["nombre"].'</a>
+																			<a href="index.php?page=productoadmin&cat='.$cat.'&subcat='.$subcat.'&idproducto='.$idpro.'&nombre='.$row["nombre"].'">'.$row["nombre"].'</a>
 																		</div>
 																		<div class="brand">';echo cortarTexto($descrip, 80); echo'</div>
 																		<div class="label-discount green">Stock: '.$row["stock"].' uds</div>
@@ -98,9 +98,10 @@
 																		
 														
 																		$precioantiguo = (($precioactual*100)/(100-$des));
+																		$precioantiguoredondeado=round($precioantiguo, 2);
 																		if($oferta==1){
 																			echo '
-																				<div class="price-prev"><strike>'.$precioantiguo.' </strike>€</div>
+																				<div class="price-prev"><strike>'.$precioantiguoredondeado.' </strike>€</div>
 																			';
 																		}
 																		echo '

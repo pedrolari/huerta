@@ -19,23 +19,6 @@
 						}
 						*/
 
-						//CON PRODUCTOS MAS VENDIDOS
-						/*
-						$cont = 0;
-						$query = "SELECT lineapedido.idproducto, SUM(lineapedido.cantidad) as TotalVentas, producto.id_imagen, producto.nombre, producto.stock, producto.precio FROM lineapedido, producto WHERE lineapedido.idproducto = producto.id_producto GROUP BY idproducto ORDER BY SUM(cantidad) DESC LIMIT 0,20";
-						$resultado1 = $con -> query($query); 
-						while ($row1=$resultado1->fetch_array())
-						{
-							$nombre = $row1["nombre"];
-							$idprodu = $row1["idproducto"];
-							$cont++;
-							$query = "INSERT INTO tags VALUES ('$idprodu','$nombre','$cont')";
-							$resultado2 = $con -> query($query); 
-							
-						}
-						*/
-						
-
 						$palabras = array();
 						$max = 0; // Es el mayor numero de cada termino
 						 
@@ -49,14 +32,14 @@
 							$tag = $row['tag'];
 							$contador = $row['contador'];
 							
-							//CONSULTO LA CATEGORIA HIJA 
+							//CONSULTO LA CATEGORIA HIJA PARA HACER EL BREADCRUMB SIN PASAR POR CATEGORIAS
 							$result2 = $con->query("SELECT * FROM categoria WHERE idcat in (SELECT idcat FROM producto WHERE id_producto = '$id')");
 							while ($rowcat = $result2->fetch_assoc()) {  
 								$cathija = $rowcat["nombre"];
 								$catpa = $rowcat["id_catpadre"];
 							}
 							
-							//CONSULTO LA CATEGORIA PADRE 
+							//CONSULTO LA CATEGORIA PADRE PARA HACER EL BREADCRUMB SIN PASAR POR CATEGORIAS
 							$result3 = $con->query("SELECT * FROM categoria WHERE idcat='$catpa'");
 							while ($rowcat = $result3->fetch_assoc()) {  
 								$catpadre = $rowcat["nombre"];
@@ -93,7 +76,7 @@
 											$size = '19';
 										endif;
 									?>
-										<a style="font-size: <?php echo $size; ?>pt;" href="index.php?page=producto&cat=<?php echo $tag['catpadre'];?>&subcat=<?php echo $tag['cathija'];?>&idproducto=<?php echo $tag['id'];?>&nombre=<?php echo $tag['tag'];?>"><?php echo $tag['tag'];?></a>
+										<a style="font-size: <?php echo $size; ?>pt;" href="index.php?page=productoproductor&cat=<?php echo $tag['catpadre'];?>&subcat=<?php echo $tag['cathija'];?>&idproducto=<?php echo $tag['id'];?>&nombre=<?php echo $tag['tag'];?>"><?php echo $tag['tag'];?></a>
 									<?php endforeach; ?>
 								</div><!-- /.tagcloud -->
 							</div><!-- /.body -->

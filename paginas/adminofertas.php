@@ -118,8 +118,12 @@
 												if ($result->num_rows > 0) {
 													while ($row = $result->fetch_assoc()) {
 														$precioantes=$row['precio'];
+
 														$total = ($precioantes -(($precioantes * $prodescu) / 100));
-														$result4 = $con->query("UPDATE producto SET precio='$total', oferta='1', descuento='$prodescu' WHERE id_producto='$idprodes' ");
+
+														$totalredondeado=round($total, 2);
+
+														$result4 = $con->query("UPDATE producto SET precio='$totalredondeado', oferta='1', descuento='$prodescu' WHERE id_producto='$idprodes' ");
 													}
 												}
 											}		

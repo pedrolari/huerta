@@ -6,22 +6,20 @@
 	$subcat = isset($_GET['subcat']) ? $_GET['subcat'] : null;
 	$producto = isset($_GET['idproducto']) ? $_GET['idproducto'] : null;
 	$nombre = isset($_GET['nombre']) ? $_GET['nombre'] : null;
-
 ?>
-<?php include("actualizarcarrito.php"); ?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
 		<!-- Meta -->
-		<meta charset="utf-8">
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 		<meta name="description" content="La Huerta de Benito - Productos frescos directamente a tu mesa">
 		<meta name="author" content="Alejandro Benito">
 	    <meta name="keywords" content="huerta ecologica, huerta, vegetariano, fresco, productos frescos">
 	    <meta name="robots" content="all">
 
-	    <title>La Huerta de Benito - Productos frescos directamente a tu mesa</title>
+	    <title>ECOCIR - Productos frescos directamente a tu mesa</title>
 
 	    <!-- Nucleo Bootstrap CSS -->
 	    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -53,11 +51,23 @@
 				<div class="col-xs-12 col-sm-4 col-md-2 sidemenu-holder">
 					<!-- ===== CATEGORIAS ===== -->
 					<?php include("./datos/categorias.php"); ?>
-					<!-- ===== NOVEDADES ===== -->
-					<?php include("./datos/topventas.php"); ?>
+					<!-- ===== MAS VENDIDOS ===== -->
+					<?php
+						if ($_SESSION['productor']==0){	
+							include("./datos/topventascliente.php");
+						} else {
+							if ($_SESSION['productor']==1){	
+								include("./datos/topventasproductor.php");
+							} else {
+								if ($_SESSION['productor']==2){	
+									include("./datos/topventasadmin.php");
+								}
+							}
+						}
+					?>
 					<!-- ===== NUEVOS ===== -->
 					<?php include("./datos/nuevos.php"); ?>
-					<!-- ===== DESTACADOS ===== -->
+					<!-- ===== OFERTAS ===== -->
 					<?php include("./datos/ofertas.php"); ?>
 				</div>
 				<!-- ===== MAIN ===== -->
@@ -73,17 +83,17 @@
 								if (!empty($_SESSION['user'])){
 									if ($page != "carrito" && $page != "checkout" && $_SESSION['productor']==0){	
 										include("./datos/cuenta.php") ; 
-										include("./datos/tags.php");
+										include("./datos/tagscliente.php");
 										include("./datos/opiniones.php");
 									} else {
 										if ($page != "carrito" && $page != "checkout" && $_SESSION['productor']==1){	
 										include("./datos/cuentaproductor.php") ; 
-										include("./datos/tags.php");
+										include("./datos/tagsproductor.php");
 										include("./datos/opiniones.php");
 										} else {
 											if ($page != "carrito" && $page != "checkout" && $_SESSION['productor']==2){	
 											include("./datos/cuentaadmin.php") ; 
-											include("./datos/tags.php");
+											include("./datos/tagsadmin.php");
 											include("./datos/opiniones.php");
 											}
 										}
@@ -169,7 +179,9 @@
 			$('.cantidad').each(function(){
 				idpronuevo = $(this).attr('id');
 				cantpronuevo = $(this).val();
-				$.post("index.php?page=carrito", { idpronuevo: idpronuevo, cantpronuevo: cantpronuevo }); 					
+				//alert(idpronuevo +"---"+ cantpronuevo);
+				$.post("index.php?page=carrito", { idpronuevo: idpronuevo, cantpronuevo: cantpronuevo }); 		
+
 			});
 		});
 	});

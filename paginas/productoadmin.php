@@ -19,7 +19,7 @@
 						$res = $con->query($consulta);
 						if($res->num_rows > 0){
 							$row = $res->fetch_assoc();
-
+							
 							$nombreproducto = $row["nombre"];
 							
 							echo '
@@ -30,39 +30,26 @@
 											<div class="single-product-gallery-item" id="slide1">
 												<img class="img-responsive" alt="" src="'.$img.'" />
 											</div><!-- /.single-product-gallery-item -->
-
 										</div><!-- /.single-product-slider -->
-
 									</div><!-- /.single-product-gallery -->
 								</div><!-- /.gallery-holder -->
 								<div class="no-margin col-xs-12 col-sm-7 body-holder">
 									<div class="body">
-										
-										
-
 										<div class="title"><a href="#">'.$row['nombre'].'</a></div>
 										<div class="brand">productor</div>
-
-
 										<a class="btn-add-to-wishlist" href="#">añadir a la lista de deseos</a>
-										
-
 										<div class="excerpt">
 											<p>'.$row['descripcion'].'</p>
 										</div>
-										
 										<div class="prices">
 											<div class="price-current">'.$row['precio'].'€</div>
 											<div class="availability"><label>Disponibilidad:</label><span class="available"> '.$row['stock'].' uds. en stock</span></div>
 										</div>
-
 									</div><!-- /.body -->
 								</div><!-- /.body-holder -->
 							</div><!-- /.row #single-product -->
-
-							'; 
-							include("./paginas/comentarios.php");    
-
+							';
+							include("./paginas/comentariosadmin.php");
 						}else{
 							echo 'Producto no encontrado...';
 						}

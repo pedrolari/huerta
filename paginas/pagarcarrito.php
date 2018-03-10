@@ -23,9 +23,19 @@
 			$cantidadproducto=$_SESSION['cart'][$row['id_producto']]['quantity'];
 			$totalLinea=$_SESSION['cart'][$row['id_producto']]['quantity']*$row['precio'];
 			
+			//INSERTO Y ACTUALIZO SI HAY MAS DE UNA CANTIDAD DETERMINADA
+			// if($_SESSION['cart'][$row['id_producto']]['stock']>80)
+			// {
+			// 	$resLineaPedido = $con->query("INSERT INTO lineapedido (idpedido, idproducto, cantidad, precio) VALUES ('$idMaxPedido', '$idpropedido', '$cantidadproducto', '$totalLinea')");
+
+			// 	$stocknuevo = ($row['stock']-$cantidadproducto);
+			// 	$resUpdateStock = $con->query("UPDATE producto SET stock='$stocknuevo' WHERE id_producto='$idpropedido'");
+			// }
+
+			$nuevo = $idpropedido +1;
 			// INSERTO LA LINEA DE PEDIDO 
 			$resLineaPedido = $con->query("INSERT INTO lineapedido (idpedido, idproducto, cantidad, precio) VALUES ('$idMaxPedido', '$idpropedido', '$cantidadproducto', '$totalLinea')");
-			
+
 			//ACTUALIZAR STOCK
 			$stocknuevo = ($row['stock']-$cantidadproducto);
 			$resUpdateStock = $con->query("UPDATE producto SET stock='$stocknuevo' WHERE id_producto='$idpropedido'");
